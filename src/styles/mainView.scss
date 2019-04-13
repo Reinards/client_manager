@@ -1,0 +1,158 @@
+@import "../styles/v";
+
+.mainView{
+    flex-grow: 1;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: $shadow--light;
+    padding: 1vw;
+    border-radius: 2px;
+    display: flex;
+
+    .itemIcon{
+
+        &:hover, &:focus{
+            color: black;
+        }
+    }
+
+    .ui.label.custom{
+        background-color: $accent !important;
+        border-color: $accent !important;
+        color: #fff!important;
+    }
+
+    ul{
+
+        & > .level_last{
+            margin-bottom: 1vw;
+        }
+
+        .level_last{
+            margin-left: 1vw;
+            padding: 0.5vw 1vw;
+            border-left: 1px solid lightgray;
+            display: block;
+            cursor: pointer;
+
+            &:hover, &:focus{
+                background: darken(white,2);
+            }
+        }
+
+        margin: 0;
+        padding: 0vw;
+        list-style: none;
+        box-sizing: border-box;
+
+        li{
+            box-sizing: border-box;
+        }
+        
+        .level_1{
+            border: 1px solid lightgray;
+            margin-bottom: 1vw;
+            border-radius: 2px;
+            
+            & > .item_name{
+                display: block;
+                font-weight: 500;
+                font-size: 20px;
+                padding: 1vw;
+                cursor: pointer;
+                background: rgb(233, 233, 233);
+                color: rgb(90, 90, 90);
+            }
+
+            & > .item_content > .level_last{
+
+                margin-left: 1.5vw;
+                &:first-child{
+                    margin-top: 1.5vw !important;
+                }
+            }
+
+            &:last-child{
+                margin-bottom: 0;
+            }
+
+            .level_2{
+                // background: lightpink;
+                padding: 1.5vw;
+
+                & > .item_name{
+                    display: block;
+                    font-weight: 600;
+                    font-size: 20px;
+                    color: darken($accent,10);
+                    cursor: pointer;
+                }
+
+                & > .item_content{
+                    margin-top: 1.5vw;
+                }
+
+                // border-top: 1px dashed lightgray;
+                border-bottom: 1px dashed lightgray;
+
+                &:last-child{
+                    border: none;
+                }
+
+                .level_3{
+                    padding: 1.5vw;
+                    border: 1px dashed lightgray;
+                    margin-bottom: 1vw;
+
+                    & > .item_name{
+                        display: block;
+                        font-weight: 600;
+                        font-size: 20px;
+                        color: darken($accent,10);
+                        cursor: pointer;
+                    }
+
+                    & > .item_content{
+                        margin-top: 1.5vw;
+                    }
+
+                    &:last-child{
+                        margin: 0;
+                    }
+                }
+            }
+        }
+
+        
+        // .level_2{
+        //     padding: unset;
+        //     border-top: 1px dashed lightgray;
+        //     border-bottom: 1px dashed lightgray;
+        //     margin-bottom: 0;
+        //     .item_name{
+        //         font-size: 16px;
+        //         color: darken($accent,10);
+        //         padding: 1.5vw;
+
+        //         &:hover, &:focus{
+        //             color: darken($accent,20);
+        //         }
+        //     }
+        // }
+
+        // .level_2 > .level_last{
+        //     // padding-bottom: 1.5vw;
+        // }
+
+        // .level_last{
+        //     margin: 0 1.5vw;
+        //     // margin-bottom: 1.5vw;
+        //     // padding: .5vw 1vw;
+        //     border-left: 1px solid lightgray;
+        // }
+        
+        .addItem{
+            background-image: $default-gradient;
+        }
+    }
+}
