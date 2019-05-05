@@ -2,6 +2,7 @@
   "name": "client_manager",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "jquery": "^3.3.1",
     "node-sass": "^4.11.0",
@@ -23,5 +24,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/preset-stage-3": "^7.0.0"
+  }
 }

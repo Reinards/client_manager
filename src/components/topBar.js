@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBar from "../components/searchBar";
+import Context from "../config/Context";
 import "../styles/topBar.scss";
 
 class TopBar extends React.Component {
@@ -7,14 +7,26 @@ class TopBar extends React.Component {
     render(){
 
         return (
-            <div className="ui top fixed menu blue inverted huge">
-                <a onClick={()=>this.props.toggleItemModal(-1)} className="item">
-                    <i className={ this.props.itemModal? "remove icon" : "add icon"}></i>
-                </a>
-                <a className="item">
-                    <i className="search icon"></i>
-                </a>
-            </div>
+            <Context.Consumer>
+                {
+                    data => (
+                        <div className="ui top fixed menu blue inverted huge">
+                            <button onClick={()=>data.toggleItemModal(-1)} className="item topBarItem">
+                                <i className={ data.itemModal? "remove icon" : "add icon"}></i>
+                            </button>
+                            <button onClick={data.toggleSearch} className="item topBarItem">
+                                <i className="search icon"></i>
+                            </button>
+                            <button onClick={data.exportData} className="item topBarItem">
+                                <i className="download icon"></i>
+                            </button>
+                            <button onClick={data.importData} className="item topBarItem">
+                                <i className="folder open icon"></i>
+                            </button>
+                        </div>
+                    )
+                }
+            </Context.Consumer>
         )
 
     }

@@ -1,14 +1,16 @@
 import React from "react";
 import $ from "jquery";
+import Context from "../config/Context";
 
 class Item extends React.Component {
 
     toggleContent = e =>{
         $(e.target.parentElement).find(".item_content").toggle();
-        this.props.setParentId(this.props.id);
+        this.context.setParentId(this.props.id);
     }
 
     copyItem(data){
+        console.log(this.context);
         
         $(".copyMessage").removeClass("animateMessage");
 
@@ -25,48 +27,47 @@ class Item extends React.Component {
     }
 
     render(){
-
-        if(this.props.showAdd === "true"){
-            return (
-                <li key="-1" className="addItem">
-                    <form className="ui form fluid" onSubmit={this.props.submitNewClient}>
-                        <div className="ui action input fluid">
-                                <input id="addItemInput" autoFocus="on" type="text" placeholder="Name" />
-                        </div>
-                    </form>
-                </li>
+        if(this.props.type !== "array"){
+            return (    
+                <Context.Consumer>
+                    {
+                        data => (
+                            <div onClick={()=>this.copyItem(this.props.data)} className={"level_last"}>
+                                <span onClick={()=>this.context.deleteItem(this.props.id)}><i className="ui minus icon small"></i></span> <span>{this.props.name}</span> - <span className="ui blue label">{this.props.data}</span>
+                            </div>
+                        )
+                    }
+                </Context.Consumer>
             );
         }else{
 
-            if(this.props.type !== "array"){
-                return (
-                    <li onClick={()=>this.copyItem(this.props.data)} className={"level_last"}>
-                        <span>{this.props.name}</span> - <span className="ui blue label">{this.props.data}</span>
-                    </li>
-                );
-            }else{
+            const nestedItemData = this.props.data.map(item=>{
+        
+                return <Item 
+                id={item.id} 
+                key={item.id} 
+                level={Number(this.props.level)+1} 
+                type={item.type} 
+                data={item.data} 
+                name={item.name} />
+                
+            });
 
-                const nestedItemData = this.props.data.map(item=>{
-            
-                    return <Item setParentId={this.props.setParentId} deleteItem={this.props.deleteItem} toggleItemModal={this.props.toggleItemModal} id={item.id} key={item.id} level={Number(this.props.level)+1} type={item.type} data={item.data} name={item.name} />
-                    
-                });
-
-                return (
-                    <li key={this.props.id} className={"level_"+this.props.level}>
-                        <span onDoubleClick={()=>this.props.toggleItemModal(this.props.id)} onClick={this.toggleContent} className="item_name">{this.props.name} <i onClick={()=>this.props.deleteItem(this.props.id)} className="itemIcon trash small icon"></i> </span>
-                        <div className="item_content">
-                            
-                            {nestedItemData}
-                        </div>
-                    </li>
-                );
-            }
-
-
+            return (
+                <div key={this.props.id} className={"level_"+this.props.level}>
+                    <span onDoubleClick={()=>this.context.toggleItemModal(this.props.id)} onClick={this.toggleContent} className="item_name">{this.props.name} <i onClick={()=>this.context.deleteItem(this.props.id)} className="itemIcon trash small icon"></i> </span>
+                    <div className="item_content">
+                        
+                        {nestedItemData}
+                    </div>
+                </div>
+            );
         }
+
     }
 
 }
+
+Item.contextType = Context;
 
 export default Item;
