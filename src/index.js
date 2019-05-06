@@ -10,7 +10,15 @@ import $ from "jquery";
 
 
 
-class App extends React.Component {   
+class App extends React.Component {
+
+    componentDidMount(){
+        const lstest = localStorage.getItem("jsonData");
+
+        if(lstest=== null || lstest === undefined){
+            localStorage.setItem("jsonData","[]");
+        }
+    }
 
 
     render(){
