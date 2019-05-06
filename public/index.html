@@ -16,6 +16,12 @@
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
 
+  <script>
+    var lstest = localStorage.getItem("jsonData");
+    if(lstest=== null || lstest === undefined){
+        localStorage.setItem("jsonData","[]");
+    }
+  </script>
   <script src="./js/jquery.js"></script>
   <script src="./js/semantic.min.js"></script>
 </body>
